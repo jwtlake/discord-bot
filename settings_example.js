@@ -1,0 +1,4 @@
+var settings = {
+	email: "",
+	password: ""
+}
