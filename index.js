@@ -39,7 +39,7 @@ var server = new Hapi.Server();
 
 // configure connection
 server.connection({
-  port: 3001
+  port: 3301
 });
 
 // add routes 
