@@ -49,6 +49,8 @@ server.route([
     method: 'GET',
     handler: function(request, reply){
       reply(`<form action="./upload" method="post" enctype="multipart/form-data">
+                <span>Choose a MP3 file to upload. The exact file name will then be available as a command.</span>
+                <br/>
                 <input type="file" name="file">
                 <button>Submit</button>
               </form>`);
@@ -77,11 +79,19 @@ server.route([
                 data.file.pipe(file);
 
                 data.file.on('end', function (err) { 
-                    var ret = {
-                        filename: data.file.hapi.filename,
-                        headers: data.file.hapi.headers
-                    }
-                    reply(JSON.stringify(ret));
+                    // var ret = {
+                    //     filename: data.file.hapi.filename,
+                    //     headers: data.file.hapi.headers
+                    // }
+                    // reply(JSON.stringify(ret));
+                    var newComand = '!'+name.replace(/\.[^/.]+$/, "");
+                    reply(`
+                      <span>` + newComand + `</span>
+                      <br/>
+                      <a href=".">Add another?</a>
+                    `);
+
+                      
                 })
             }
 
