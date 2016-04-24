@@ -90,7 +90,17 @@ server.route([
         if(err){
           reply(err);
         }else{
-          reply(files);
+          //return list of available commands
+          var html = '<ul>';
+
+          files.filter(function(file) { return file.substr(-3) === '.mp3'; }) //only get mp3 files
+          .forEach(function(file) {
+            html += '<li>' + file + '</li>';
+          });
+
+          html += '</ul>';
+
+          reply(html);
         }
       })      
     }
