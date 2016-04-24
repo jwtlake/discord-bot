@@ -93,9 +93,9 @@ server.route([
           //return list of available commands
           var html = '<h1>Available Commands</h1> <ul>';
 
-          files.filter(function(file) { return file.substr(-3) === '.mp3'; }) //only get mp3 files
+          files.filter(function(file) { return file.substr(-4) === '.mp3'; }) //only get mp3 files
           .forEach(function(file) {
-            html += '<li>!' + file.substring(0, str.length - 3) + '</li>';
+            html += '<li>!' + file.substring(0, file.length - 4) + '</li>';
             console.log(html);
           });
 
