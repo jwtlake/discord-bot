@@ -1,5 +1,6 @@
 var Discord = require("discord.js");
 var mybot = new Discord.Client();
+var isConnected = false;
 
 //bot settings 
 mybot.autoReconnect = true;
@@ -25,6 +26,7 @@ function login(email, password){
   mybot.login(email, password)
   .then(function(success){
     console.log(success);
+    isConnected = true;
   }).catch(function(error){
     console.log('Error connecting as Email: '+ settings.email + ' Password: ' +settings.password);
     console.log(error);
@@ -33,7 +35,13 @@ function login(email, password){
 
 function logout(){
   mybot.logout();
+  isConnected = false;
 }
+
+function getStatus(){
+  return isConnected;
+}
+
 
 //exports
 module.exports = {
