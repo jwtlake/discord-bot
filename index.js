@@ -23,16 +23,18 @@ server.route([
     path: '/',
     method: 'GET',
     handler: function(request, reply){
-      reply(` <div>
-              <h1>DiscordBot Status:` + discordBot.getStatus ? 'ONLINE' : 'OFFLINE' + `</h1>
-              </div>
-              <div>
-              <form action="./upload" method="post" enctype="multipart/form-data">
-                <span>Choose a MP3 file to upload. The exact file name will then be available as a command.</span>
-                <br/>
-                <input type="file" name="file">
-                <button>Submit</button>
-              </form>
+      reply(`<div>
+                <div>
+                  <span>DiscordBot Status: ` + discordBot.getStatus ? 'ONLINE' : 'OFFLINE' + `</span>
+                </div>
+                <div>
+                <form action="./upload" method="post" enctype="multipart/form-data">
+                  <span>Choose a MP3 file to upload. The exact file name will then be available as a command.</span>
+                  <br/>
+                  <input type="file" name="file">
+                  <button>Submit</button>
+                </form>
+                </div>
               </div>`);
     }
   },
