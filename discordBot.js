@@ -22,7 +22,7 @@ mybot.on("message", function(message){
 
 //public functions
 function login(email, password){
-  this.mybot.login(email, password)
+  mybot.login(email, password)
   .then(function(success){
     console.log(success);
   }).catch(function(error){
@@ -32,7 +32,7 @@ function login(email, password){
 }
 
 function logout(){
-  this.mybot.logout();
+  mybot.logout();
 }
 
 //exports
