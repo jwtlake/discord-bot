@@ -3,46 +3,21 @@
 //set app root
 global.appRoot = require('path').resolve(__dirname);
 
+//dependencies
 var fs = require('fs');
 var Hapi = require('hapi');
-var Discord = require("discord.js");
 var settings = require('./settings.js');
-var mybot = new Discord.Client();
+var discordBot = require('./discordBot');
 
-mybot.on("message", function(message){
-    //check if message for bot
-    if(message.content.charAt(0) === "!" && message.content.length > 1) {
-       mybot.joinVoiceChannel(message.author.voiceChannel, function(error, voice) {
-           //AndHisNameIsJohnCena
-           voice.playFile("./audio/" + message.content.slice(1) + ".mp3", {"volume":1.0}, function(error, intent) {
-             if (error) console.log(error.stack);
-  	             intent.on("end", function() {
-                     mybot.leaveVoiceChannel();
-                 });
-           });
-      });
-    }
-});
-
-//connect
-mybot.login(settings.email, settings.password)
-.then(function(success){
-  console.log(success);
-}).catch(function(error){
-  console.log('Error connecting as Email: '+ settings.email + ' Password: ' +settings.password);
-  console.log(error);
-});
-
-
-// new server instance
+//new server instance
 var server = new Hapi.Server();
 
-// configure connection
+//configure connection
 server.connection({
   port: 3301
 });
 
-// add routes 
+//add routes 
 server.route([
   {
     path: '/',
@@ -79,11 +54,6 @@ server.route([
                 data.file.pipe(file);
 
                 data.file.on('end', function (err) { 
-                    // var ret = {
-                    //     filename: data.file.hapi.filename,
-                    //     headers: data.file.hapi.headers
-                    // }
-                    // reply(JSON.stringify(ret));
                     var newComand = '!'+name.replace(/\.[^/.]+$/, "");
                     reply(`
                       <span>` + newComand + `</span>
@@ -100,7 +70,10 @@ server.route([
   }
 ]);
 
-// start server
+//start server
 server.start(function () {
   console.log('Server listening @ ' + server.info.uri);
 });
+
+//log on bot
+discordBot.login(settings.email, settings.password);
