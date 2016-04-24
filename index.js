@@ -29,13 +29,17 @@ server.route([
                   <span>DiscordBot Status: ` + status + `</span>
                 </div>
                 <div>
-		</br>
+		            </br>
                 <form action="./upload" method="post" enctype="multipart/form-data">
                   <span>Choose a MP3 file to upload. The exact file name will then be available as a command.</span>
                   <br/>
                   <input type="file" name="file">
                   <button>Submit</button>
                 </form>
+                </div>
+                </br>
+                <div>
+                  <span>Available Commands: </span><a ref='./list'>here</a>
                 </div>
               </div>`);
     }
@@ -96,11 +100,11 @@ server.route([
           files.filter(function(file) { return file.substr(-4) === '.mp3'; }) //only get mp3 files
           .forEach(function(file) {
             html += '<li>!' + file.substring(0, file.length - 4) + '</li>';
-            console.log(html);
           });
 
           html += '</ul>';
 
+          //return
           reply(html);
         }
       })      
