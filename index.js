@@ -23,9 +23,10 @@ server.route([
     path: '/',
     method: 'GET',
     handler: function(request, reply){
+      var status = (discordBot.getStatus ? 'ONLINE' : 'OFFLINE');
       reply(`<div>
                 <div>
-                  <span>DiscordBot Status: ` + discordBot.getStatus ? 'ONLINE' : 'OFFLINE' + `</span>
+                  <span>DiscordBot Status: ` + status + `</span>
                 </div>
                 <div>
                 <form action="./upload" method="post" enctype="multipart/form-data">
