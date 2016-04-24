@@ -39,7 +39,7 @@ server.route([
                 </div>
                 </br>
                 <div>
-                  <span>Available Commands: </span><a ref='./list'>here</a>
+                  <span>Available Commands: </span><a href="./list">here</a>
                 </div>
               </div>`);
     }
