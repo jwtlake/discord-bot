@@ -23,12 +23,13 @@ server.route([
     path: '/',
     method: 'GET',
     handler: function(request, reply){
-      var status = (discordBot.getStatus ? 'ONLINE' : 'OFFLINE');
+      var status = discordBot.getStatus() ? 'ONLINE' : 'OFFLINE';
       reply(`<div>
                 <div>
                   <span>DiscordBot Status: ` + status + `</span>
                 </div>
                 <div>
+		</br>
                 <form action="./upload" method="post" enctype="multipart/form-data">
                   <span>Choose a MP3 file to upload. The exact file name will then be available as a command.</span>
                   <br/>

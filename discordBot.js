@@ -46,5 +46,6 @@ function getStatus(){
 //exports
 module.exports = {
 	login: login,
-	logout: logout
+	logout: logout,
+	getStatus: getStatus
 }
