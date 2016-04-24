@@ -1,5 +1,5 @@
 var Discord = require("discord.js");
-var path = require('path'); 
+var fs = require('fs'); 
 var mybot = new Discord.Client();
 var isConnected = false;
 
@@ -13,7 +13,7 @@ mybot.on("message", function(message) {
 		//get requested file from command
 		var file = "./audio/" + message.content.slice(1) + ".mp3";
 		//check if it exists
-		path.exists(file, function(exists) { 
+		fs.exists(file, function(exists) { 
 			if (exists) { 
 				//play audio file
 				playAudioFile(file);
