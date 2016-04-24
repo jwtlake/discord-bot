@@ -82,7 +82,7 @@ server.route([
     }
   },
   {
-    method: 'GET'
+    method: 'GET',
     path: '/list',
     handler: function(request, reply) {
       //get mp3 files
