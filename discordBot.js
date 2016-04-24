@@ -1,4 +1,5 @@
 var Discord = require("discord.js");
+var path = require('path'); 
 var mybot = new Discord.Client();
 var isConnected = false;
 
