@@ -16,7 +16,7 @@ mybot.on("message", function(message) {
 		fs.exists(file, function(exists) { 
 			if (exists) { 
 				//play audio file
-				playAudioFile(file);
+				playAudioFile(message, file);
 			}
 		});
 	}
@@ -43,7 +43,7 @@ function getStatus() {
   return isConnected;
 }
 
-function playAudioFile(file) {
+function playAudioFile(message, file) {
 	//connect to the current voice channel of commanding user
 	mybot.joinVoiceChannel(message.author.voiceChannel, function(error, voice) {
 		//play audio file
