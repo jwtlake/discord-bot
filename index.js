@@ -91,11 +91,12 @@ server.route([
           reply(err);
         }else{
           //return list of available commands
-          var html = '<ul>';
+          var html = '<h1>Available Commands</h1> <ul>';
 
           files.filter(function(file) { return file.substr(-3) === '.mp3'; }) //only get mp3 files
           .forEach(function(file) {
-            html += '<li>' + file + '</li>';
+            html += '<li>!' + file.substring(0, str.length - 3) + '</li>';
+            console.log(html);
           });
 
           html += '</ul>';
