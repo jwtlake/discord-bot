@@ -20,9 +20,9 @@ server.connection({
 //add routes 
 server.route([
   {
-    path: '/',
     method: 'GET',
-    handler: function(request, reply){
+    path: '/',
+    handler: function(request, reply) {
       var status = discordBot.getStatus() ? 'ONLINE' : 'OFFLINE';
       reply(`<div>
                 <div>
@@ -50,31 +50,49 @@ server.route([
           allow: 'multipart/form-data'
       },
       handler: function (request, reply) {
+            //get user provided file
             var data = request.payload;
             if (data.file) {
+              //get file info
                 var name = data.file.hapi.filename;
                 var path = appRoot + "/audio/" + name;
                 var file = fs.createWriteStream(path);
 
+                //catch errors
                 file.on('error', function (err) { 
-                    console.error(err) 
+                    console.error(err);
+                    reply('<span>Error uploading file!</span>'); 
                 });
 
                 data.file.pipe(file);
 
-                data.file.on('end', function (err) { 
-                    var newComand = '!'+name.replace(/\.[^/.]+$/, "");
-                    reply(`
-                      <span>` + newComand + `</span>
-                      <br/>
-                      <a href=".">Add another?</a>
-                    `);
-
-                      
+                //when upload finishes successfully
+                data.file.on('end', function (err) {
+                  //return new available command 
+                  var newComand = '!'+name.replace(/\.[^/.]+$/, "");
+                  reply(`
+                    <span>` + newComand + `</span>
+                    <br/>
+                    <a href=".">Add another?</a>
+                  `);     
                 })
             }
 
         }
+    }
+  },
+  {
+    method: 'GET'
+    path: '/list',
+    handler: function(request, reply) {
+      //get mp3 files
+      fs.readdir('./audio', function(err, files) {
+        if(err){
+          reply(err);
+        }else{
+          reply(files);
+        }
+      })      
     }
   }
 ]);
